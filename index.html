@@ -19,9 +19,11 @@
             try {
                 await fetch("https://script.google.com/macros/s/AKfycbyJtbIYk-DEea3TnsPIrtmkuC7QlMeF0PNdaOVYuA4vdn9z94eVFSBH_vJ3ty7xs1Mv/exec", {
                     method: "POST",
+                    mode: "cors",  
                     body: JSON.stringify(formData),
                     headers: { "Content-Type": "application/json" }
                 });
+                
                 alert("Successfully submitted!");
                 this.reset();
             } catch (error) {
