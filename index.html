@@ -3,40 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()"> 
-    <title>Document</title>
+    <title>Join Waitlist</title>
 </head>
 <body>
     <form id="waitlistForm">
         <input type="email" name="email" placeholder="Enter your email" required>
         <button type="submit">Join Waitlist</button>
     </form>
-    
+
     <script>
         document.getElementById("waitlistForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             const formData = { email: this.email.value };
-        
+
             try {
-                const response = await fetch("https://script.google.com/macros/s/AKfycbzVMl5RvoQ7tkEPio3WyjE_VtPGNf4IvZxPN6oJNhiK-CeONL29nT-GkBkQ3PAYDYjh/exec", {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbwejNlccdmZGRG9_VLYsa6PxyoEv16fS0pj00Gaj2bVjPRKwmYHohWlwFCACza1VZEb/exec", {
                     method: "POST",
+                    mode: "cors",  // Fixes CORS issue
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(formData),
-                    headers: { "Content-Type": "application/json" }
                 });
-        
-                const result = await response.json();
-                if (result.status === "success") {
-                    alert("Successfully submitted! ✅");
+
+                if (response.ok) {
+                    alert("Successfully submitted!");
                     this.reset();
                 } else {
-                    alert("Something went wrong. ❌");
+                    alert("Error submitting form.");
                 }
             } catch (error) {
-                alert("Error submitting form. ❌");
+                alert("Network error, try again later.");
             }
         });
-        
     </script>
-    
 </body>
 </html>
