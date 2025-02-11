@@ -6,7 +6,7 @@
     <title>Raaha Health</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ruda:wght@400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Ruda:wght@400..900&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -37,6 +37,7 @@
             left: 50%;
             transform: translate(-50%,-50%);
             transition: all 0.6s ease;
+
         }
         
         #slogan {
@@ -51,11 +52,13 @@
             transform: translate(-50%,-50%);
             transition: all 0.5s ease;
             text-align: center;
+            transition: all 0.6s ease;
+
         }
         
         #contact_list {
             display: flex;
-            gap: 18px;
+            gap: 25px;
             transition: all 0.5s ease;
             position: absolute;
             top: 45%;
@@ -96,7 +99,7 @@
             border-radius: 10px;
             border: none;
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-            transition: transform 0.2s ease-in-out;
+            transition: left 0.5s ease, top 0.5s ease;
 
             position: absolute;
             top: 55%;
@@ -111,7 +114,7 @@
         
         #coming_soon {
             width: 15%;
-            transition: transform 0.2s ease-in-out;
+            transition: left 0.5s ease;
             position: absolute;
             top: 80%;
             left: 50%;
@@ -121,6 +124,21 @@
         #coming_soon:hover {
             transform: translate(-50%, -50%) scale(1.1);
         }
+
+        #content {
+            position: absolute;
+            text-align: left;
+            top: 49%;
+            width: 50%;
+            left: 45.2%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-family: "Instrument Sans", serif;
+            font-weight: 400;
+            opacity: 0;
+            transition: opacity 1s ease, top 0.6s ease; 
+        }
+        
         
         @media (max-width: 768px) {
             #logo {
@@ -148,6 +166,7 @@
             #learn_more{
                 top: 63%;
             }
+
         }
         
         
@@ -172,6 +191,7 @@
         onclick="window.open('https://www.instagram.com/raahahealth/', '_blank')">
 
     </div>
+    <p id="content">An emerging digital platform dedicated to connecting individuals with licensed psychologists, psychiatrists, and counselors across India. We believe in accessible, stigma-free mental health support tailored to your needs</p>
     <button id="learn_more" onclick="play_animation()">Learn More</button>
     <img src="./images/coming-soon.png" id="coming_soon" draggable="false" alt="">
 
@@ -180,26 +200,50 @@
         const logo = document.getElementById('logo');
         const contact_list = document.getElementById('contact_list');
         const elements = document.querySelectorAll(".icons");
+        const slogan = document.getElementById('slogan');
+        const content = document.getElementById('content');
+        const coming_soon = document.getElementById('coming_soon');
+        const learn_more = document.getElementById('learn_more');
         
         function play_animation(){
             logo.style.left = '20%';
             logo.style.top = '10%';
+            content.style.opacity='1';
         
             contact_list.style.transform = 'none'; 
         
             if (window.innerWidth <= 768) {
                 logo.style.width = '30%';
-        
+                
                 contact_list.style.top = '10%';
                 contact_list.style.left = '60%'; 
                 contact_list.style.right = 'auto'; 
                 contact_list.style.transform = 'scale(0.8)';  
             } else {
                 logo.style.width = '10%';
+                logo.style.left = '10%';
         
                 contact_list.style.top = '10%';
-                contact_list.style.left = '70%';
+                contact_list.style.left = '80%';
                 contact_list.style.transform = 'scale(1)';  
+
+                slogan.style.fontSize='2.5rem';
+                slogan.style.width='50%';
+                slogan.style.color='#032020';
+                slogan.style.fontWeight='600';
+                slogan.style.top='25%';
+                slogan.style.left='45%';
+                slogan.style.textAlign='left';
+                slogan.style.fontFamily = "'Instrument Sans', sans-serif";
+
+                content.style.top='45%';
+                
+
+                coming_soon.style.left='85%';
+
+                learn_more.style.top='80%';
+                learn_more.style.left='23.5%';
+                learn_more.innerHTML='Send';
             }
         
             elements.forEach((el) => {
