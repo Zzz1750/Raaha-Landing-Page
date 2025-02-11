@@ -18,14 +18,13 @@
             const formData = { email: this.email.value };
         
             try {
-                const response = await fetch("https://script.google.com/macros/s/AKfycbxQD-xmFGL0aiAc1T_ogiF4AOto1TIZ6DxGg5AYy9a-BdGHdbkcGlHKZlL0YWXV_viC/exec", {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbwFBWs-S0EV6docuPdSfliArsfeZm5shx0qG9Q6OFuDDs5qLq4vIfTL_oMtJtWxaMZm/exec", {
                     method: "POST",
                     body: JSON.stringify(formData),
-                    headers: { "Content-Type": "application/json" },
-                    mode: "cors"  // Ensure CORS is enabled
+                    headers: { "Content-Type": "application/json" }
                 });
         
-                const result = await response.json(); // Convert response to JSON
+                const result = await response.json();
                 if (result.status === "success") {
                     alert("Successfully submitted! ✅");
                     this.reset();
