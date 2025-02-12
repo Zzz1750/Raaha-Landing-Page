@@ -1,372 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raaha Health</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Ruda:wght@400..900&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raaha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Ruda:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        
-        #landing_back {
-            width: 100%;
-            height: 100vh;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-        
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      #landing_back {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      #logo {
+        width: 18%;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.6s ease;
+      }
+
+      #slogan {
+        width: 20%;
+        color: #022121cb;
+        font-size: 1rem;
+        font-family: "Ruda", serif;
+        font-weight: 600;
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        transition: all 0.6s ease;
+      }
+
+      #contact_list {
+        display: flex;
+        gap: 25px;
+        transition: all 0.5s ease;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+      }
+
+      .icons {
+        height: 30px;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .icons:hover {
+        transform: scale(1.2);
+      }
+
+      #email {
+        transform: scale(1.4);
+      }
+
+      #email:hover {
+        transform: scale(1.5);
+      }
+
+      #instagram {
+        transform: scale(1.2);
+      }
+
+      #instagram:hover {
+        transform: scale(1.4);
+      }
+
+      #learn_more {
+        font-size: 0.9rem;
+        padding: 11px 16px;
+        background-color: #043c3c;
+        color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+        transition: left 0.5s ease, top 0.5s ease;
+
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      #learn_more:hover {
+        cursor: pointer;
+      }
+
+      #coming_soon {
+        width: 15%;
+        transition: left 0.5s ease;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      #content {
+        position: absolute;
+        text-align: left;
+        top: 49%;
+        width: 50%;
+        left: 45.2%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        font-family: "Instrument Sans", serif;
+        font-weight: 400;
+        opacity: 0;
+        transition: opacity 1s ease, top 0.6s ease;
+      }
+
+      #sheetdb-form {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        top: 65%;
+        left: 30%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        transition: opacity 1.5s ease;
+      }
+
+      .inputt {
+        font-size: 20px;
+        padding: 8px;
+        border: none;
+        font-family: "Instrument Sans", serif;
+        padding-left: 20px;
+        border-radius: 10px;
+        margin-top: 12px;
+      }
+      .inputt::placeholder {
+        color: #043c3c8b;
+      }
+
+      #support_email {
+        position: absolute;
+        top: 92%;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 15px;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        text-align: center;
+        line-height: 18px;
+      }
+      #error {
+        position: absolute;
+        top: 72%;
+        color: red;
+        font-size: 15px;
+        left: 35%;
+        transform: translate(-50%, -50%);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .unselectable {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+      }
+
+      @media (max-width: 850px) {
         #logo {
-            width: 18%;
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            transition: all 0.6s ease;
-
+          width: 42%;
+          top: 28%;
         }
-        
+
         #slogan {
-            width: 20%;
-            color: #022121cb;
-            font-size: 1rem;
-            font-family: "Ruda", serif;
-            font-weight: 600;
-            position: absolute;
-            top: 35%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            text-align: center;
-            transition: all 0.6s ease;
-
+          font-size: 0.9rem;
+          width: 82%;
         }
-        
+
         #contact_list {
-            display: flex;
-            gap: 25px;
-            transition: all 0.5s ease;
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 5;
+          top: 50%;
+          gap: 20px;
         }
-        
         .icons {
-            height: 30px;
-            transition: transform 0.2s ease-in-out;
+          height: 25px;
         }
-        
-        .icons:hover {
-            transform: scale(1.2);
-        }
-        
-        #email {
-            transform: scale(1.4);
-        }
-        
-        #email:hover {
-            transform: scale(1.5);
-        }
-        
-        #instagram {
-            transform: scale(1.2);
-        }
-        
-        #instagram:hover {
-            transform: scale(1.4);
-        }
-        
-        #learn_more {
-            font-size: 0.9rem;
-            padding: 11px 16px;
-            background-color: #043c3c;
-            color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            border: none;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-            transition: left 0.5s ease, top 0.5s ease;
 
-            position: absolute;
-            top: 55%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1);
-        }
-        
-        #learn_more:hover {
-            cursor: pointer;
-        }
-        
         #coming_soon {
-            width: 15%;
-            transition: left 0.5s ease;
-            position: absolute;
-            top: 80%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1);
+          width: 40%;
+          top: 80%;
         }
-        
-        #coming_soon:hover {
-            transform: translate(-50%, -50%) scale(1.1);
+        #learn_more {
+          top: 63%;
+          font-size: 15px;
+          padding: 8px 12px;
         }
-
-        #content {
-            position: absolute;
-            text-align: left;
-            top: 49%;
-            width: 50%;
-            left: 45.2%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            font-family: "Instrument Sans", serif;
-            font-weight: 400;
-            opacity: 0;
-            transition: opacity 1s ease, top 0.6s ease; 
+        #sheetdb-form {
+          top: 75%;
+          left: 50%;
         }
-        
-        #sheetdb-form{
-            opacity: 0;
-            position: absolute;
-            top: 70%;
-            left: 30%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            transition: opacity 1.5s ease;
+        .inputt {
+          font-size: 15px;
+          padding: 5px;
+          padding-left: 10px;
         }
-
-        #name_tag{
-            font-size: 20px;
-            font-family: "Instrument Sans", serif;
-            padding: 8px;
-            padding-left:20px ;
-            border: none;
-            border-radius: 10px;
+        #support_email {
+          font-size: 12px;
         }
-        #name_tag::placeholder{
-            color: #043c3c8b;
+        #error {
+          font-size: 12px;
+          top: 67%;
+          left: 50%;
         }
-
-        #support_email{
-            position: absolute;
-            top: 93%;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 15px;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        }
-   
-        @media (max-width: 850px) {
-            #logo {
-                width: 42%;
-                top: 28%;
-            }
-        
-            #slogan {
-                font-size: 0.9rem;
-                width: 82%;
-            }
-        
-            #contact_list {
-                top: 50%;
-                gap: 20px;
-            }
-            .icons {
-                height: 25px;
-            }
-            
-            #coming_soon {
-                width: 40%;
-                top: 80%;
-            }
-            #learn_more{
-                top: 63%;
-                font-size: 15px;
-                padding: 8px 12px;
-            }
-            #sheetdb-form{
-                top: 75%;
-                left: 50%;
-            }
-            #name_tag{
-                font-size: 15px;
-                padding: 5px;
-                padding-left: 10px;
-            }
-            #support_email{
-                font-size: 12px;
-            }
-        }
-        
-        
-        
+      }
     </style>
-</head>
-<body>
-    <img src="./images/landing_back.png" id="landing_back" alt="" draggable="false">
-    <img src="./images/logo.png" id="logo" alt="">
-    <p id="slogan">Revolutionising Mental Health Care for a Better Tomorrow.</p>
+  </head>
+  <body>
+    <img
+      src="./images/landing_back.png"
+      id="landing_back"
+      alt=""
+      draggable="false"
+      class="unselectable"
+    />
+    <img
+      src="./images/logo.png"
+      id="logo"
+      alt=""
+      draggable="false"
+      class="unselectable"
+    />
+    <p id="slogan" class="unselectable">
+      Revolutionising Mental Health Care for a Better Tomorrow.
+    </p>
     <div id="contact_list">
-        <img src="./images/mail.png" id="email" alt="email_icon" class="icons" draggable="false" 
-        onclick="window.location.href='mailto:antonyzharon2@gmail.com?subject=Inquiry'">
+      <img
+        src="./images/mail.png"
+        id="email"
+        alt="email_icon"
+        class="icons"
+        draggable="false"
+      />
 
-        <img src="./images/linkedin-logo.png" id="linkedin" alt="linkedin" class="icons" draggable="false" 
-        onclick="window.open('https://www.linkedin.com/company/raaha-health/', '_blank')">
+      <img
+        src="./images/linkedin-logo.png"
+        id="linkedin"
+        alt="linkedin"
+        class="icons"
+        draggable="false"
+        onclick="window.open('https://www.linkedin.com/company/raaha-health/', '_blank')"
+      />
 
-        <img src="./images/twitter.png" id="twitter" alt="twitter" class="icons" draggable="false" 
-        onclick="window.open('https://x.com/raahahealth', '_blank')">
+      <img
+        src="./images/twitter.png"
+        id="twitter"
+        alt="twitter"
+        class="icons"
+        draggable="false"
+        onclick="window.open('https://x.com/raahahealth', '_blank')"
+      />
 
-        <img src="./images/instagram.png" id="instagram" alt="instagram" class="icons" draggable="false" 
-        onclick="window.open('https://www.instagram.com/raahahealth/', '_blank')">
-
+      <img
+        src="./images/instagram.png"
+        id="instagram"
+        alt="instagram"
+        class="icons"
+        draggable="false"
+        onclick="window.open('https://www.instagram.com/raahahealth/', '_blank')"
+      />
     </div>
-    <p id="content">An emerging digital platform dedicated to connecting individuals with licensed psychologists, psychiatrists, and counselors across India. We believe in accessible, stigma-free mental health support tailored to your needs</p>
+    <p id="content" class="unselectable">
+      An emerging digital platform dedicated to connecting individuals with
+      licensed psychologists, psychiatrists, and counselors across India. We
+      believe in accessible, stigma-free mental health support tailored to your
+      needs
+    </p>
     <button id="learn_more" onclick="play_animation()">Learn More</button>
-    <img src="./images/coming-soon.png" id="coming_soon" draggable="false" alt="">
-    <form action="https://sheetdb.io/api/v1/c1kg4n3e1yarx" method="POST" id="sheetdb-form">
-        <input id="name_tag" name="data[email]" placeholder="Email">
+    <img
+      src="./images/coming-soon.png"
+      id="coming_soon"
+      draggable="false"
+      alt=""
+      class="unselectable"
+    />
+    <form
+      action="https://sheetdb.io/api/v1/c1kg4n3e1yarx"
+      method="POST"
+      id="sheetdb-form"
+    >
+      <input
+        id="satyam_tag"
+        name="data[name]"
+        placeholder="Name"
+        class="inputt"
+      />
+      <br />
+      <input
+        id="name_tag"
+        name="data[email]"
+        placeholder="Email"
+        class="inputt"
+      />
     </form>
-    <p id="support_email">support@raahahealth.com</p>
+    <p id="error"></p>
+    <p id="support_email">for queries<br />support@raahahealth.com</p>
     <script>
-        const logo = document.getElementById('logo');
-        const contact_list = document.getElementById('contact_list');
-        const elements = document.querySelectorAll(".icons");
-        const slogan = document.getElementById('slogan');
-        const content = document.getElementById('content');
-        const coming_soon = document.getElementById('coming_soon');
-        const learn_more = document.getElementById('learn_more');
-        const sheetdb_form = document.getElementById('sheetdb-form');
+      const logo = document.getElementById("logo");
+      const contact_list = document.getElementById("contact_list");
+      const elements = document.querySelectorAll(".icons");
+      const slogan = document.getElementById("slogan");
+      const content = document.getElementById("content");
+      const coming_soon = document.getElementById("coming_soon");
+      const learn_more = document.getElementById("learn_more");
+      const sheetdb_form = document.getElementById("sheetdb-form");
 
-        function play_animation(){
-            logo.style.left = '20%';
-            logo.style.top = '10%';
-            content.style.opacity='1';
-            sheetdb_form.style.opacity='1';
-        
-            contact_list.style.transform = 'none'; 
-            
-            //mobile
-            if (window.innerWidth <= 850) {
-                logo.style.width = '30%';
-                
-                contact_list.style.top = '10%';
-                contact_list.style.left = '58%'; 
-                contact_list.style.right = 'auto'; 
-                contact_list.style.transform = 'scale(0.8)';  
-
-                slogan.style.fontSize='1.4rem';
-                slogan.style.width='90%';
-                slogan.style.top='20%';
-                slogan.style.left='50%';
-                slogan.style.textAlign='left';
-                slogan.style.fontFamily = "'Instrument Sans', sans-serif";
-                slogan.style.color='#032020';
+      function play_animation() {
+        logo.style.left = "20%";
+        logo.style.top = "10%";
+        content.style.opacity = "1";
+        sheetdb_form.style.display = "block";
+        setTimeout(()=>{
+            sheetdb_form.style.opacity = "1";
+        },1);
 
 
-                content.style.fontSize='100%';
-                content.style.width='80%';
-                content.style.top='38%';
+        contact_list.style.transform = "none";
 
-                const initialLeft = getComputedStyle(coming_soon).left;
-                const initialTop = getComputedStyle(coming_soon).top;
+        //mobile
+        if (window.innerWidth <= 850) {
+          logo.style.width = "30%";
 
-                coming_soon.style.transition = 'left 0.6s ease, top 0.6s ease, width 0.6s ease';
+          contact_list.style.top = "10%";
+          contact_list.style.left = "58%";
+          contact_list.style.right = "auto";
+          contact_list.style.transform = "scale(0.8)";
 
-                requestAnimationFrame(() => {
-                    coming_soon.style.left = '50%'; 
-                    coming_soon.style.top = '60%';
-                    coming_soon.style.width = '30%';
-                });
+          slogan.style.fontSize = "1.4rem";
+          slogan.style.width = "90%";
+          slogan.style.top = "20%";
+          slogan.style.left = "50%";
+          slogan.style.textAlign = "left";
+          slogan.style.fontFamily = "'Instrument Sans', sans-serif";
+          slogan.style.color = "#032020";
 
+          content.style.fontSize = "100%";
+          content.style.width = "80%";
+          content.style.top = "38%";
 
-                learn_more.style.top='82%';
-                learn_more.innerHTML='Subscribe';
-            } 
-            //pc
-            else {
-                logo.style.width = '10%';
-                logo.style.left = '10%';
-        
-                contact_list.style.top = '10%';
-                contact_list.style.left = '80%';
-                contact_list.style.transform = 'scale(1)';  
+          const initialLeft = getComputedStyle(coming_soon).left;
+          const initialTop = getComputedStyle(coming_soon).top;
 
-                slogan.style.fontSize='2.5rem';
-                slogan.style.width='50%';
-                slogan.style.color='#032020';
-                slogan.style.fontWeight='600';
-                slogan.style.top='25%';
-                slogan.style.left='45%';
-                slogan.style.textAlign='left';
-                slogan.style.fontFamily = "'Instrument Sans', sans-serif";
+          coming_soon.style.transition =
+            "left 0.6s ease, top 0.6s ease, width 0.6s ease";
 
-                content.style.top='45%';
-                
+          requestAnimationFrame(() => {
+            coming_soon.style.left = "50%";
+            coming_soon.style.top = "58%";
+            coming_soon.style.width = "30%";
+          });
 
-                coming_soon.style.left='85%';
-
-                learn_more.style.top='77%';
-                learn_more.style.left='24%'
-                learn_more.innerHTML='Subscribe';
-            }
-        
-            elements.forEach((el) => {
-                el.style.height = "22px";
-                el.style.width = "22px";
-            });
+          learn_more.style.top = "85%";
+          learn_more.innerHTML = "Subscribe";
         }
-        
+        //pc
+        else {
+          logo.style.width = "10%";
+          logo.style.left = "10%";
+
+          contact_list.style.top = "10%";
+          contact_list.style.left = "80%";
+          contact_list.style.transform = "scale(1)";
+
+          slogan.style.fontSize = "2.5rem";
+          slogan.style.width = "50%";
+          slogan.style.color = "#032020";
+          slogan.style.fontWeight = "600";
+          slogan.style.top = "25%";
+          slogan.style.left = "45%";
+          slogan.style.textAlign = "left";
+          slogan.style.fontFamily = "'Instrument Sans', sans-serif";
+
+          content.style.top = "45%";
+
+          coming_soon.style.left = "85%";
+
+          learn_more.style.top = "77%";
+          learn_more.style.left = "24%";
+          learn_more.innerHTML = "Subscribe";
+        }
+
+        elements.forEach((el) => {
+          el.style.height = "22px";
+          el.style.width = "22px";
+        });
+      }
     </script>
 
     <script>
-        document.getElementById("name_tag").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault(); 
-            }
+      document.getElementById("email").addEventListener("click", function () {
+        window.location.href = "mailto:contact@raahahealth.com";
+      });
+
+      document
+        .getElementById("name_tag")
+        .addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+          }
         });
-        
 
-        var form = document.getElementById('sheetdb-form');
-        const subscribe = document.getElementById('learn_more');
-        const name_tag = document.getElementById('name_tag');
-        let clicks = 0;
+      var form = document.getElementById("sheetdb-form");
+      const subscribe = document.getElementById("learn_more");
+      const name_tag = document.getElementById("name_tag");
+      const satyam_tag = document.getElementById("satyam_tag");
+      let clicks = 0;
+      const error = document.getElementById("error");
 
+      subscribe.addEventListener("click", () => {
+        clicks++;
+        if (clicks >= 2) {
+          const email_value = document.getElementById("name_tag").value.trim();
+          const satyam_tag_value = document
+            .getElementById("satyam_tag")
+            .value.trim();
 
-        subscribe.addEventListener('click',()=>{
-            clicks++;
-            if(clicks >= 2){
+          if (
+            email_value !== "" &&
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email_value) &&
+            satyam_tag !== ""
+          ) {
+            error.innerHTML = "";
+            subscribe.innerHTML = "Subscribed";
+            fetch(form.action, {
+              method: "POST",
+              body: new FormData(document.getElementById("sheetdb-form")),
+            })
+              .then((response) => response.json())
+              .then((html) => {
+                name_tag.value = "";
+                satyam_tag.value = "";
+              });
+          } else {
+            error.innerHTML = "Invalid Entry";
+          }
+        }
+      });
+    </script>
+    <script>
+      let touchStartY = 0;
+      document.addEventListener("touchstart", (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
 
-                const email_value = document.getElementById('name_tag').value.trim();
-                
-                if(email_value !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email_value)){
-                    subscribe.innerHTML = 'Subscribed';
-                    fetch(form.action, {
-                        method : "POST",
-                        body: new FormData(document.getElementById("sheetdb-form")),
-                    }).then(
-                        response => response.json()
-                    ).then((html) => {
-                      name_tag.value="";
-                    });
-                }
-                else{
-                    alert("Please enter your Email");
-                }
-               
-            }
-        });
-         
-      </script>
-</body>
+      document.addEventListener("touchend", (e) => {
+        let touchEndY = e.changedTouches[0].clientY;
+        if (touchEndY - touchStartY > 100) {
+          location.reload(); // Refresh page if swiped down
+        }
+      });
+    </script>
+  </body>
 </html>
