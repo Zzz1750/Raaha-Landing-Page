@@ -12,6 +12,8 @@
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="./images/landing_back.webp" />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Ruda:wght@400..900&display=swap"
       rel="stylesheet"
@@ -19,10 +21,10 @@
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <style>
       body {
+        display: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
-        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -246,6 +248,7 @@
       alt=""
       draggable="false"
       class="unselectable"
+      loading="lazy"
     />
     <img
       src="./images/logo.webp"
@@ -329,6 +332,11 @@
     <p id="error"></p>
     <p id="support_email">for queries<br />support@raahahealth.com</p>
     <script>
+      window.addEventListener("load", function () {
+        document.body.style.display = "flex";
+    });
+    </script>
+    <script defer>
       const logo = document.getElementById("logo");
       const contact_list = document.getElementById("contact_list");
       const elements = document.querySelectorAll(".icons");
@@ -420,7 +428,7 @@
       }
     </script>
 
-    <script>
+    <script defer>
       document.getElementById("email").addEventListener("click", function () {
         window.location.href = "mailto:contact@raahahealth.com";
       });
