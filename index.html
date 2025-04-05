@@ -20,6 +20,10 @@
     />
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         display: none;
         margin: 0;
@@ -31,6 +35,79 @@
         height: 100vh;
       }
 
+      #spinner-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        z-index: 0;
+      }
+
+      .spinner {
+        width: 100px;
+        height: 100px;
+        animation: rotate 2s linear forwards;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .spinner circle {
+        fill: none;
+        stroke: #ade6c1;
+        stroke-width: 8;
+        stroke-dasharray: 0 138;
+        stroke-linecap: butt;
+        animation: draw 2s ease-out forwards;
+      }
+
+      #expander1 {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        background-color: #ade6c1;
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale3d(0, 0, 1);
+        animation: expand1 1.5s ease-in-out forwards;
+        animation-delay: 2s;
+        z-index: 1;
+      }
+
+      #expander2 {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        background-color: #043c3c;
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale3d(0, 0, 1);
+        animation: expand2 1.5s ease-in-out forwards;
+        animation-delay: 2.8s;
+        z-index: 2;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+      }
+
+      #leaf_logo {
+        z-index: 3;
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+        animation: fadeOut 0.3s ease-out forwards;
+        animation-delay: 3.5s;
+      }
+
+      /*main_content*/
       #landing_back {
         width: 100%;
         height: 100vh;
@@ -169,13 +246,16 @@
 
       #support_email {
         position: absolute;
-        top: 92%;
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%,-50%);
         color: rgba(255, 255, 255, 0.5);
         font-size: 15px;
         font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
           sans-serif;
-        text-align: center;
         line-height: 18px;
+        text-align: center;
+        margin: 0;
       }
       #error {
         position: absolute;
@@ -239,257 +319,334 @@
           left: 50%;
         }
       }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes draw {
+        0% {
+          stroke-dasharray: 0 138;
+        }
+        100% {
+          stroke-dasharray: 138 0;
+        }
+      }
+
+      @keyframes expand1 {
+        0% {
+          transform: translate(-50%, -50%) scale3d(0, 0, 1);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale3d(40, 40, 1);
+        }
+      }
+
+      @keyframes expand2 {
+        0% {
+          transform: translate(-50%, -50%) scale3d(0, 0, 1);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale3d(50, 50, 1);
+        }
+      }
+
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body>
-    <img
-      src="./images/landing_back.webp"
-      id="landing_back"
-      alt=""
-      draggable="false"
-      class="unselectable"
-      loading="lazy"
-    />
-    <img
-      src="./images/logo.webp"
-      id="logo"
-      alt=""
-      draggable="false"
-      class="unselectable"
-    />
-    <p id="slogan" class="unselectable">
-      Revolutionising Mental Health Care for a Better Tomorrow.
-    </p>
-    <div id="contact_list">
-      <img
-        src="./images/mail.webp"
-        id="email"
-        alt="email_icon"
-        class="icons"
-        draggable="false"
-      />
+    <div id="intro_div">
+      <div id="spinner-wrapper">
+        <svg class="spinner" viewBox="0 0 60 60">
+          <circle cx="30" cy="30" r="22" />
+        </svg>
+      </div>
 
-      <img
-        src="./images/linkedin-logo.webp"
-        id="linkedin"
-        alt="linkedin"
-        class="icons"
-        draggable="false"
-        onclick="window.open('https://www.linkedin.com/company/raaha-health/', '_blank')"
-      />
-
-      <img
-        src="./images/twitter.webp"
-        id="twitter"
-        alt="twitter"
-        class="icons"
-        draggable="false"
-        onclick="window.open('https://x.com/raahahealth', '_blank')"
-      />
-
-      <img
-        src="./images/instagram.webp"
-        id="instagram"
-        alt="instagram"
-        class="icons"
-        draggable="false"
-        onclick="window.open('https://www.instagram.com/raahahealth/', '_blank')"
-      />
+      <div id="expander1"></div>
+      <div id="expander2"></div>
+      <img src="./images/leaf_logo.webp" id="leaf_logo" />
     </div>
-    <p id="content" class="unselectable">
-      An emerging digital platform dedicated to connecting individuals with
-      licensed psychologists, psychiatrists, and counselors across India. We
-      believe in accessible, stigma-free mental health support tailored to your
-      needs
-    </p>
-    <button id="learn_more" onclick="play_animation()">Learn More</button>
-    <img
-      src="./images/coming-soon.webp"
-      id="coming_soon"
-      draggable="false"
-      alt=""
-      class="unselectable"
-    />
-    <form
-      action="https://sheetdb.io/api/v1/c1kg4n3e1yarx"
-      method="POST"
-      id="sheetdb-form"
-    >
-      <input
-        id="satyam_tag"
-        name="data[name]"
-        placeholder="Name"
-        class="inputt"
-      />
-      <br />
-      <input
-        id="name_tag"
-        name="data[email]"
-        placeholder="Email"
-        class="inputt"
-      />
-    </form>
-    <p id="error"></p>
-    <p id="support_email">for queries<br />support@raahahealth.com</p>
-    <script>
-      window.addEventListener("load", function () {
-        document.body.style.display = "flex";
-    });
-    </script>
-    <script defer>
-      const logo = document.getElementById("logo");
-      const contact_list = document.getElementById("contact_list");
-      const elements = document.querySelectorAll(".icons");
-      const slogan = document.getElementById("slogan");
-      const content = document.getElementById("content");
-      const coming_soon = document.getElementById("coming_soon");
-      const learn_more = document.getElementById("learn_more");
-      const sheetdb_form = document.getElementById("sheetdb-form");
 
-      function play_animation() {
-        logo.style.left = "20%";
-        logo.style.top = "10%";
-        content.style.opacity = "1";
-        sheetdb_form.style.display = "block";
-        setTimeout(()=>{
+    <div id="main_content" style="display: none">
+      <img
+        src="./images/landing_back.webp"
+        id="landing_back"
+        alt=""
+        draggable="false"
+        class="unselectable"
+        loading="lazy"
+      />
+      <img
+        src="./images/logo.webp"
+        id="logo"
+        alt=""
+        draggable="false"
+        class="unselectable"
+      />
+      <p id="slogan" class="unselectable">
+        Revolutionising Mental Health Care for a Better Tomorrow.
+      </p>
+      <div id="contact_list">
+        <img
+          src="./images/mail.webp"
+          id="email"
+          alt="email_icon"
+          class="icons"
+          draggable="false"
+        />
+
+        <img
+          src="./images/linkedin-logo.webp"
+          id="linkedin"
+          alt="linkedin"
+          class="icons"
+          draggable="false"
+          onclick="window.open('https://www.linkedin.com/company/raaha-health/', '_blank')"
+        />
+
+        <img
+          src="./images/twitter.webp"
+          id="twitter"
+          alt="twitter"
+          class="icons"
+          draggable="false"
+          onclick="window.open('https://x.com/raahahealth', '_blank')"
+        />
+
+        <img
+          src="./images/instagram.webp"
+          id="instagram"
+          alt="instagram"
+          class="icons"
+          draggable="false"
+          onclick="window.open('https://www.instagram.com/raahahealth/', '_blank')"
+        />
+      </div>
+      <p id="content" class="unselectable">
+        An emerging digital platform dedicated to connecting individuals with
+        licensed psychologists, psychiatrists, and counselors across India. We
+        believe in accessible, stigma-free mental health support tailored to
+        your needs
+      </p>
+      <button id="learn_more" onclick="play_animation()">Learn More</button>
+      <img
+        src="./images/coming-soon.webp"
+        id="coming_soon"
+        draggable="false"
+        alt=""
+        class="unselectable"
+      />
+      <form
+        action="https://sheetdb.io/api/v1/c1kg4n3e1yarx"
+        method="POST"
+        id="sheetdb-form"
+      >
+        <input
+          id="satyam_tag"
+          name="data[name]"
+          placeholder="Name"
+          class="inputt"
+        />
+        <br />
+        <input
+          id="name_tag"
+          name="data[email]"
+          placeholder="Email"
+          class="inputt"
+        />
+      </form>
+      <p id="error"></p>
+      <p id="support_email">for queries<br />support@raahahealth.com</p>
+      <script>
+        window.addEventListener("load", function () {
+          document.body.style.display = "flex";
+        });
+      </script>
+      <script defer>
+        const logo = document.getElementById("logo");
+        const contact_list = document.getElementById("contact_list");
+        const elements = document.querySelectorAll(".icons");
+        const slogan = document.getElementById("slogan");
+        const content = document.getElementById("content");
+        const coming_soon = document.getElementById("coming_soon");
+        const learn_more = document.getElementById("learn_more");
+        const sheetdb_form = document.getElementById("sheetdb-form");
+
+        function play_animation() {
+          logo.style.left = "20%";
+          logo.style.top = "10%";
+          content.style.opacity = "1";
+          sheetdb_form.style.display = "block";
+          setTimeout(() => {
             sheetdb_form.style.opacity = "1";
-        },1);
+          }, 1);
 
+          contact_list.style.transform = "none";
 
-        contact_list.style.transform = "none";
+          //mobile
+          if (window.innerWidth <= 850) {
+            logo.style.width = "30%";
 
-        //mobile
-        if (window.innerWidth <= 850) {
-          logo.style.width = "30%";
+            contact_list.style.top = "10%";
+            contact_list.style.left = "58%";
+            contact_list.style.right = "auto";
+            contact_list.style.transform = "scale(0.8)";
 
-          contact_list.style.top = "10%";
-          contact_list.style.left = "58%";
-          contact_list.style.right = "auto";
-          contact_list.style.transform = "scale(0.8)";
+            slogan.style.fontSize = "1.4rem";
+            slogan.style.width = "90%";
+            slogan.style.top = "20%";
+            slogan.style.left = "50%";
+            slogan.style.textAlign = "left";
+            slogan.style.fontFamily = "'Instrument Sans', sans-serif";
+            slogan.style.color = "#032020";
 
-          slogan.style.fontSize = "1.4rem";
-          slogan.style.width = "90%";
-          slogan.style.top = "20%";
-          slogan.style.left = "50%";
-          slogan.style.textAlign = "left";
-          slogan.style.fontFamily = "'Instrument Sans', sans-serif";
-          slogan.style.color = "#032020";
+            content.style.fontSize = "100%";
+            content.style.width = "80%";
+            content.style.top = "38%";
 
-          content.style.fontSize = "100%";
-          content.style.width = "80%";
-          content.style.top = "38%";
+            const initialLeft = getComputedStyle(coming_soon).left;
+            const initialTop = getComputedStyle(coming_soon).top;
 
-          const initialLeft = getComputedStyle(coming_soon).left;
-          const initialTop = getComputedStyle(coming_soon).top;
+            coming_soon.style.transition =
+              "left 0.6s ease, top 0.6s ease, width 0.6s ease";
 
-          coming_soon.style.transition =
-            "left 0.6s ease, top 0.6s ease, width 0.6s ease";
+            requestAnimationFrame(() => {
+              coming_soon.style.left = "50%";
+              coming_soon.style.top = "58%";
+              coming_soon.style.width = "30%";
+            });
 
-          requestAnimationFrame(() => {
-            coming_soon.style.left = "50%";
-            coming_soon.style.top = "58%";
-            coming_soon.style.width = "30%";
+            learn_more.style.top = "86%";
+            learn_more.innerHTML = "Subscribe";
+          }
+          //pc
+          else {
+            logo.style.width = "10%";
+            logo.style.left = "10%";
+
+            contact_list.style.top = "10%";
+            contact_list.style.left = "80%";
+            contact_list.style.transform = "scale(1)";
+
+            slogan.style.fontSize = "2.5rem";
+            slogan.style.width = "50%";
+            slogan.style.color = "#032020";
+            slogan.style.fontWeight = "600";
+            slogan.style.top = "25%";
+            slogan.style.left = "45%";
+            slogan.style.textAlign = "left";
+            slogan.style.fontFamily = "'Instrument Sans', sans-serif";
+
+            content.style.top = "45%";
+
+            coming_soon.style.left = "85%";
+
+            learn_more.style.top = "77%";
+            learn_more.style.left = "24%";
+            learn_more.innerHTML = "Subscribe";
+          }
+
+          elements.forEach((el) => {
+            el.style.height = "22px";
+            el.style.width = "22px";
+          });
+        }
+      </script>
+
+      <script defer>
+        document.getElementById("email").addEventListener("click", function () {
+          window.location.href = "mailto:contact@raahahealth.com";
+        });
+
+        document
+          .getElementById("name_tag")
+          .addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+              event.preventDefault();
+            }
           });
 
-          learn_more.style.top = "86%";
-          learn_more.innerHTML = "Subscribe";
-        }
-        //pc
-        else {
-          logo.style.width = "10%";
-          logo.style.left = "10%";
+        var form = document.getElementById("sheetdb-form");
+        const subscribe = document.getElementById("learn_more");
+        const name_tag = document.getElementById("name_tag");
+        const satyam_tag = document.getElementById("satyam_tag");
+        let clicks = 0;
+        const error = document.getElementById("error");
 
-          contact_list.style.top = "10%";
-          contact_list.style.left = "80%";
-          contact_list.style.transform = "scale(1)";
+        subscribe.addEventListener("click", () => {
+          clicks++;
+          if (clicks >= 2) {
+            const email_value = document
+              .getElementById("name_tag")
+              .value.trim();
+            const satyam_tag_value = document
+              .getElementById("satyam_tag")
+              .value.trim();
 
-          slogan.style.fontSize = "2.5rem";
-          slogan.style.width = "50%";
-          slogan.style.color = "#032020";
-          slogan.style.fontWeight = "600";
-          slogan.style.top = "25%";
-          slogan.style.left = "45%";
-          slogan.style.textAlign = "left";
-          slogan.style.fontFamily = "'Instrument Sans', sans-serif";
-
-          content.style.top = "45%";
-
-          coming_soon.style.left = "85%";
-
-          learn_more.style.top = "77%";
-          learn_more.style.left = "24%";
-          learn_more.innerHTML = "Subscribe";
-        }
-
-        elements.forEach((el) => {
-          el.style.height = "22px";
-          el.style.width = "22px";
-        });
-      }
-    </script>
-
-    <script defer>
-      document.getElementById("email").addEventListener("click", function () {
-        window.location.href = "mailto:contact@raahahealth.com";
-      });
-
-      document
-        .getElementById("name_tag")
-        .addEventListener("keypress", function (event) {
-          if (event.key === "Enter") {
-            event.preventDefault();
+            if (
+              email_value !== "" &&
+              /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email_value) &&
+              satyam_tag !== ""
+            ) {
+              error.innerHTML = "";
+              subscribe.innerHTML = "Subscribed";
+              fetch(form.action, {
+                method: "POST",
+                body: new FormData(document.getElementById("sheetdb-form")),
+              })
+                .then((response) => response.json())
+                .then((html) => {
+                  name_tag.value = "";
+                  satyam_tag.value = "";
+                });
+            } else {
+              error.innerHTML = "Invalid Entry";
+            }
           }
         });
+      </script>
+      <script>
+        let touchStartY = 0;
+        document.addEventListener("touchstart", (e) => {
+          touchStartY = e.touches[0].clientY;
+        });
 
-      var form = document.getElementById("sheetdb-form");
-      const subscribe = document.getElementById("learn_more");
-      const name_tag = document.getElementById("name_tag");
-      const satyam_tag = document.getElementById("satyam_tag");
-      let clicks = 0;
-      const error = document.getElementById("error");
-
-      subscribe.addEventListener("click", () => {
-        clicks++;
-        if (clicks >= 2) {
-          const email_value = document.getElementById("name_tag").value.trim();
-          const satyam_tag_value = document
-            .getElementById("satyam_tag")
-            .value.trim();
-
-          if (
-            email_value !== "" &&
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email_value) &&
-            satyam_tag !== ""
-          ) {
-            error.innerHTML = "";
-            subscribe.innerHTML = "Subscribed";
-            fetch(form.action, {
-              method: "POST",
-              body: new FormData(document.getElementById("sheetdb-form")),
-            })
-              .then((response) => response.json())
-              .then((html) => {
-                name_tag.value = "";
-                satyam_tag.value = "";
-              });
-          } else {
-            error.innerHTML = "Invalid Entry";
+        document.addEventListener("touchend", (e) => {
+          let touchEndY = e.changedTouches[0].clientY;
+          if (touchEndY - touchStartY > 100) {
+            location.reload();
           }
-        }
-      });
-    </script>
+        });
+      </script>
+    </div>
+
     <script>
-      let touchStartY = 0;
-      document.addEventListener("touchstart", (e) => {
-        touchStartY = e.touches[0].clientY;
-      });
+      setTimeout(() => {
+        document.getElementById("leaf_logo").style.display = "none";
+        document.getElementById("spinner-wrapper").style.display = "none";
+        document.getElementById("expander1").style.display = "none";
 
-      document.addEventListener("touchend", (e) => {
-        let touchEndY = e.changedTouches[0].clientY;
-        if (touchEndY - touchStartY > 100) {
-          location.reload(); 
-        }
-      });
+        const exp2 = document.getElementById("expander2");
+        exp2.style.opacity = "0";
+
+        document.getElementById("main_content").style.display = "block";
+
+        setTimeout(() => {
+          exp2.style.display = "none";
+        }, 1000);
+      }, 4000);
     </script>
   </body>
 </html>
